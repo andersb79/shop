@@ -1,25 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { observer } from "mobx-react-lite";
+
+import Store from "./models/store";
+import Api from "./api/api";
+
+const store = Store.create();
+store.init(Api, window.localStorage.getItem("loggedIn"));
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. Hello
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {store.initzialize && store.users.map((x) => <div>{x.name}</div>)}
+        {!store.initzialize && <div>:(</div>}
       </header>
     </div>
   );
 }
 
-export default App;
+export default observer(App);
