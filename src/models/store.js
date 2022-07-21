@@ -8,16 +8,12 @@ const Store = types
     cartItems: types.array(CartItem, []),
   })
   .volatile((self) => ({
-    loggedIn: null,
     initzialize: false,
     api: null,
   }))
   .views((self) => ({
     get cartCount() {
       return self.cartItems === null ? 0 : self.cartItems.length;
-    },
-    get todoCount() {
-      return self.todoList === null ? 0 : self.todoList.length;
     },
   }))
   .actions((self) => {
@@ -40,7 +36,6 @@ const Store = types
         self.cartItems.remove(item);
       },
       addShopItem(item) {
-        //kolla om den finns. i så fall öka count
         let cartItem = self.cartItems.find((x) => x.id === item.id);
 
         if (cartItem) {
