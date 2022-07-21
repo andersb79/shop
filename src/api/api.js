@@ -70,6 +70,9 @@ export default {
   async getUsers() {
     return this.response({ table: "Users" });
   },
+  async getShopItems() {
+    return this.response({ table: "ShopItems" });
+  },
   updateUser(user) {
     console.log(user.JSON);
     const u = {
